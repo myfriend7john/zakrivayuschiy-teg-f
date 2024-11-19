@@ -1,0 +1,380 @@
+/* Здесь вы напишете основную часть стилей страницы.
+
+Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
+✦ theme-dark — класс тёмной темы
+✦ theme-light — класс светлой темы
+✦ like-icon — для svg-иконки анимированного сердца
+✦ card__like-button — для кнопки Like рядом с иконкой
+✦ card__icon-button — для кнопки, оборачивающей иконку
+✦ card__icon-button — для кнопки, оборачивающей иконку
+✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
+✦ button__text — для обозначения текстового элемента внутри кнопки
+
+Кроме этого, не меняйте HTML переключателя тем. Его разметка также гарантирует работу своего скрипта.
+
+*/
+
+.page {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  min-inline-size: 320px;
+  min-block-size: 100dvb;
+  background-color: var(--background-color, #fff);
+  background-image: var(--background-image);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: var(--font-family-main);
+  color: var(--text-color);
+  font-variation-settings: "wght" var(--main-font-weight);
+  margin-bottom: 100px;
+}
+
+.header {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  width: clamp(23.4375rem, 16.2852rem + 30.5164vw, 43.75rem);
+  font-family: var(--font-family-accent);
+  background-color: var(--background-color, #fff);
+  border: var(--border);
+  padding-top: clamp(7.5rem, 6.346rem + 4.923vw, 8.5rem);
+  margin: 100px auto;
+}
+
+.header__logo {
+  text-transform: uppercase;
+  font-size: clamp(3.063rem, 2.7104rem + 1.5023vw, 4.063rem);
+}
+
+.header__title {
+  text-transform: uppercase;
+  font-size: clamp(0.875rem, 0.6769rem + 0.8451vw, 1.438rem);
+  margin-block-start: 10px;
+}
+
+.theme-menu {
+  margin-block: 20px;
+  margin-inline-start: 15px;
+}
+
+.theme-menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.theme-menu__button {
+  position: relative;
+  text-transform: uppercase;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: opacity 0.3s ease;
+}
+
+.theme-menu__button:disabled {
+  opacity: 0.6;
+}
+
+.theme-menu__button:disabled::before {
+  content: "▶";
+  position: absolute;
+  top: 0px;
+  left: -20px;
+  animation: arrowMoveLeftRightSlow 0.5s ease-in-out infinite alternate;
+}
+
+.theme-menu__button:hover {
+  opacity: 0.6;
+}
+
+.theme-menu__button:focus {
+  outline: none;
+  opacity: 0.6;
+}
+
+.theme-menu__button:focus-visible {
+  opacity: 0.6;
+}
+
+.theme-menu__button::after {
+  content: "";
+  display: block;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-color);
+  scale: 0;
+  transform-origin: left;
+  transition: scale 0.3s ease;
+}
+
+.theme-menu__button:focus-visible::after {
+  scale: 1;
+}
+
+.main {
+  display: grid;
+  width: clamp(375px, 48.7%, 700px);
+  gap: 50px;
+}
+
+.card {
+  border: var(--border);
+  background-color: var(--background-color, #fff);
+}
+
+.card__title {
+  font-variation-settings: "wght" var(--bold-font-weight);
+  font-size: 18px;
+  line-height: normal;
+  padding: 4px 10px;
+}
+
+.card__image-wrapper {
+  position: relative;
+}
+
+.card__image-watermark {
+  position: absolute;
+  z-index: 1;
+  text-transform: uppercase;
+  opacity: 0.5;
+  font-family: var(--font-family-accent);
+  font-size: 14px;
+  text-shadow: 0 1px var(--shadow-color), 0 -1px var(--shadow-color),
+    1px 0 var(--shadow-color), -1px 0 var(--shadow-color);
+  inset-block-start: 25px;
+  inset-inline-end: clamp(0.6875rem, -0.3221rem + 4.3077vw, 1.5625rem);
+}
+
+@supports (-webkit-text-stroke: 1px var(--shadow-color)) {
+  .card__image-watermark {
+    -webkit-text-stroke: 1px var(--shadow-color);
+    text-shadow: none;
+  }
+}
+
+.card__image {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  border-block: var(--border);
+  min-width: 375px;
+  min-height: 375px;
+  inline-size: 100%;
+  aspect-ratio: 1/1;
+}
+
+.card__content {
+  display: grid;
+  align-items: center;
+  padding: 29px 25px 5px 25px;
+  font-size: 18px;
+  line-height: 21px;
+  gap: 27px;
+}
+
+.card__button-section {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 25px 20px 25px;
+  gap: 2px;
+  cursor: pointer;
+}
+
+.card__like-button {
+  min-inline-size: 130px;
+  max-block-size: 38px;
+}
+
+.button {
+  position: relative;
+  cursor: pointer;
+  border: 2px solid currentColor;
+  background: var(--background-color, #fff);
+  font-family: var(--accent-font);
+  font-size: 14px;
+  transition: box-shadow ease 0.3s;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:focus-visible {
+  box-shadow: 2px 2px 0 0 var(--text-color);
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--text-color);
+  scale: 0 1;
+  transform-origin: left;
+  transition: scale ease-in-out 0.5s;
+}
+
+.button:hover::before {
+  scale: 1;
+}
+
+.card__icon-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  min-height: 38px;
+  transition: border-color 0.3s ease;
+}
+
+.card__icon-button:focus {
+  outline: none;
+}
+
+.card__icon-button:focus-visible {
+  border: var(--border);
+}
+
+.like-icon {
+  width: 39px;
+  height: 36px;
+  padding-top: 3px;
+}
+
+.button__text {
+  display: block;
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-family-accent);
+  color: var(--button__text-color);
+  mix-blend-mode: difference;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.section__save_button {
+  display: flex;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.footer__button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 18px 15px 18px;
+  gap: 8px;
+  max-inline-size: 306px;
+}
+
+.footer__icon {
+  inline-size: 28px;
+  block-size: 28px;
+  color: var(--icon-color);
+  mix-blend-mode: difference;
+}
+
+.dialog::backdrop {
+  opacity: 0.75;
+  background-color: var(--background-color-backdrop);
+}
+
+.dialog {
+  border: var(--border);
+  color: var(--text-color);
+  min-width: 341px;
+  min-inline-size: 341px;
+  max-inline-size: 357px;
+  background: var(--background-color);
+  padding: 30px 42px 30px 42px;
+}
+
+.dialog__container {
+  display: flex;
+  flex-direction: column;
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  gap: 20px;
+}
+
+.dialog__title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 21px;
+  font-family: var(--font-family-accent);
+  font-weight: var(--main-font-weight);
+}
+
+.dialog__icon {
+  align-self: center;
+  inline-size: 39px;
+  block-size: 39px;
+}
+
+.dialog__button {
+  min-height: 38px;
+  width: 100%;
+  text-transform: uppercase;
+  margin-top: 30px;
+}
+
+@media (width > 375px) {
+  .header__title {
+    margin-block-start: 20px;
+  }
+
+  .footer__icon {
+    inline-size: 21px;
+    block-size: 21px;
+  }
+
+  .footer__button {
+    flex-direction: row;
+    max-inline-size: 335px;
+  }
+}
+
+/* фильтры */
+
+.filter__grayscale {
+  filter: grayscale(50%);
+}
+
+.filter__brightness {
+  filter: brightness(85%);
+}
+
+.filter__saturate {
+  filter: saturate(120%);
+}
+
+.filter__sepia {
+  filter: sepia(50%);
+}
+
+.filter__invert {
+  filter: invert(100%);
+}
+
+.filter__saturate-sepia {
+  filter: saturate(40%) sepia(70%);
+}
+
+.filter__hue-rotate {
+  filter: hue-rotate(300deg);
+}
+
+.filter__blur {
+  filter: blur(1px);
+}
